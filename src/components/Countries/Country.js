@@ -1,15 +1,17 @@
 import React from 'react';
 
-const Country = ({country, cases, deaths, recovered}) => (
+const Country = ({country, cases, new_cases, deaths, new_deaths, recovered, critical}) => (
     <tbody>
       <tr>
-        <th scope="row">{country}</th>
-        <td>{cases}</td>
+        <th>{country}</th>
+        <td className="text-danger">{cases}</td>
+        <td className="text-muted">+{new_cases}</td>
         <td>{deaths}</td>
-        <td>{recovered}</td>
+        <td className="text-muted">+{new_deaths}</td>
+        <td className="text-success">{recovered}</td>
+        <td>{critical}</td>
       </tr>
     </tbody>
-  
 );
 
 export default Country;
