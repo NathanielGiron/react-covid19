@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import Country from './Country.js';
 
 class Countries extends Component {
@@ -49,18 +50,24 @@ class Countries extends Component {
           return response2.json();
         })
         .then((data2) => {
+          
+          const sorted = _.orderBy(data2.countries_stat, (obj) => {
+            return parseInt((obj.cases).split(",").join(""));
+          }, ['desc'])
+
           this.setState({
-            data: data2.countries_stat,
+            data: sorted,
             last_updated: data2.statistic_taken_at
           })
-          console.log(data2.countries_stat);
         })
       })
       .catch((error) => console.log(error));
   }
 
   renderItems() {
-    return this.state.data.map((item) => (
+    const { data } = this.state;
+
+    return data.map((item) => (
       <Country 
         key={item.country_name} 
         country={item.country_name} 
