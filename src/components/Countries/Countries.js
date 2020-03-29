@@ -114,7 +114,7 @@ class Countries extends Component {
           <div className="col-xs-12 col-sm-12 col-md-10">
             <SearchBox searchChange={this.onSearchChange} />
 
-            <table className="table table-bordered table-hover rounded">
+            <table className="table table-bordered table-sm table-hover rounded">
               <thead className="thead-dark">
                 <tr>
                   <th scope="col">Country</th>
@@ -122,6 +122,7 @@ class Countries extends Component {
                   <th scope="col">New Cases</th>
                   <th scope="col">Deaths</th>
                   <th scope="col">New Deaths</th>
+                  <th scope="col">Fatality Rate</th>
                   <th scope="col">Recovered</th>
                   <th scope="col">Critical</th>
                 </tr>
