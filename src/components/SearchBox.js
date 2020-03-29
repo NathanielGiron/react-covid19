@@ -9,6 +9,7 @@ const SearchBox = ({ searchChange }) => {
           <FaSearch />
         </div>
         <div className="col-md-3 col-xs-8">
+          
           <input 
             type="search" 
             className="form-control form-control-sm" 
