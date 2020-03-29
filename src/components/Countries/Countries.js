@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import Country from './Country.js';
+import SearchBox from '../SearchBox';
 
 class Countries extends Component {
   constructor(props) {
@@ -13,7 +14,8 @@ class Countries extends Component {
       new_cases: '',
       new_deaths: '',
       data: [],
-      last_updated: ''
+      last_updated: '',
+      searchField: ''
     };
   }
 
@@ -50,7 +52,7 @@ class Countries extends Component {
           return response2.json();
         })
         .then((data2) => {
-          
+
           const sorted = _.orderBy(data2.countries_stat, (obj) => {
             return parseInt((obj.cases).split(",").join(""));
           }, ['desc'])
@@ -64,10 +66,18 @@ class Countries extends Component {
       .catch((error) => console.log(error));
   }
 
+  onSearchChange = (event) => {
+    this.setState({searchField: event.target.value})
+  }
+
   renderItems() {
     const { data } = this.state;
 
-    return data.map((item) => (
+    const filteredCountries = data.filter(country => {
+      return country.country_name.toLowerCase().includes(this.state.searchField.toLowerCase());
+    });
+
+    return filteredCountries.map((item) => (
       <Country 
         key={item.country_name} 
         country={item.country_name} 
@@ -84,7 +94,7 @@ class Countries extends Component {
     return (
       <div>
         <div className="row pt-2">
-          <div className="col-2">
+          <div className="col-xs-12 col-sm-12 col-md-2">
             <div className="card bg-light">
               <div className="card-body">
                 <strong>Total Confirmed Cases:</strong> <h4 className="text-danger">{this.state.total_cases}</h4>
@@ -101,8 +111,9 @@ class Countries extends Component {
             </div>
               
           </div>
-          <div className="col-10">
-            
+          <div className="col-xs-12 col-sm-12 col-md-10">
+            <SearchBox searchChange={this.onSearchChange} />
+
             <table className="table table-bordered table-hover rounded">
               <thead className="thead-dark">
                 <tr>
