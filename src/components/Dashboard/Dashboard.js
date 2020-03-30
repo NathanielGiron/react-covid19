@@ -111,17 +111,18 @@ class Countries extends Component {
             <div className="card-body">
               <h5><i class="fas fa-globe-americas"></i> Global Data</h5>
               <SearchBox searchChange={this.onSearchChange} />
+              
               <table className="table table-bordered table-sm table-hover rounded">
                 <thead className="thead-dark">
                   <tr>
                     <th scope="col">Country</th>
                     <th scope="col">Confirmed</th>
-                    <th scope="col">New Cases</th>
+                    <th scope="col" className="d-none d-sm-table-cell">New Cases</th>
                     <th scope="col">Deaths</th>
-                    <th scope="col">New Deaths</th>
-                    <th scope="col">Fatality Rate</th>
-                    <th scope="col">Recovered</th>
-                    <th scope="col">Critical</th>
+                    <th scope="col" className="d-none d-sm-table-cell">New Deaths</th>
+                    <th scope="col" className="d-none d-sm-table-cell">Fatality Rate</th>
+                    <th scope="col" className="d-none d-sm-table-cell">Recovered</th>
+                    <th scope="col" className="d-none d-sm-table-cell">Critical</th>
                   </tr>
                 </thead>
                 <tbody>
