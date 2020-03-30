@@ -5,6 +5,7 @@ const AboutPage = () => (
     <div className="jumbotron mt-2">
       <h6 className="display-4">About</h6>
       <p className="lead">I created this Real-Time COVID-19 Tracker to provide you the latest information about the coronavirus situation. This app grabs the most relevant information for you periodically.</p>
+      <p>Data brought by World Health Organization.</p>
       <p>-N.G.</p>
     </div>
   </div>

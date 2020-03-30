@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const NavBar = () => (
   <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
     <Link className='navbar-brand' to='/'>
-      <i class="fas fa-viruses"></i> Real Time COVID-19 Tracker
+      <i className="fas fa-viruses"></i> Real Time COVID-19 Tracker
     </Link>
     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>
@@ -15,6 +15,11 @@ const NavBar = () => (
         <li className="nav-item">
           <Link className='nav-link' to='/'>
             Home
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className='nav-link' to='/us-cases'>
+            US Cases
           </Link>
         </li>
         <li className="nav-item">

@@ -1,17 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-const Country = ({ country, cases, new_cases, deaths, new_deaths, recovered, critical}) => ( 
+const State = ({ state, cases, new_cases, deaths, new_deaths }) => ( 
   <tr>
-    <td><strong>{country}</strong>{country === 'USA' ? <Link className='btn btn-sm btn-primary float-right' to='/us-cases'>Expand</Link> : ''}</td>
+    <td><strong>{state}</strong></td>
     <td className="text-danger"><small className="d-block d-sm-none">{new_cases}</small>{cases}</td>
     <td className="text-muted d-none d-sm-table-cell">{new_cases}</td>
     <td><small className="d-block d-sm-none">{new_deaths}</small>{deaths}</td>
     <td className="text-muted d-none d-sm-table-cell">{new_deaths}</td>
     <td className="text-info d-none d-sm-table-cell">{ deaths ? (parseInt(deaths.split(",").join("")) / parseInt(cases.split(",").join("")) * 100).toFixed(1) + '%' : '' }</td>
-    <td className="text-success d-none d-sm-table-cell">{recovered}</td>
-    <td className="d-none d-sm-table-cell">{critical}</td>
   </tr>
 );
 
-export default Country;
+export default State;

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import Overview from '../Overview';
-import Country from './Country';
-import SearchBox from '../SearchBox';
-import './dashboard.css';
+import Overview from '../components/Overview';
+import State from './State';
+import SearchBox from '../components/SearchBox';
+import '../components/Dashboard/dashboard.css';
 
 class Countries extends Component {
   constructor(props) {
@@ -11,38 +11,35 @@ class Countries extends Component {
 
     this.state = {
       total_cases: '',
-      total_recovered: '',
       total_deaths: '',
       active_cases: '',
       new_cases: '',
       new_deaths: '',
       data: [],
-      last_updated: '',
       searchField: ''
     };
   }
 
   componentDidMount() {
-    const worldstat = 'https://covid19-server.chrismichael.now.sh/api/v1/AllReports';
+    const worldstat = 'https://covid19-server.chrismichael.now.sh/api/v1/CasesInAllUSStates';
 
       fetch(worldstat)
       .then((response1) => {
         return response1.json();
       })
       .then((data1) => {
-        console.log(data1.reports);
-        const sorted = _.orderBy(data1.reports[0].table[0], (obj) => {
+        console.log(data1.data[0].table);
+        const sorted = _.orderBy(data1.data[0].table, (obj) => {
           return parseInt((obj.TotalCases).split(",").join(""));
         }, ['desc']);
 
         this.setState({
-          total_cases: data1.reports[0].cases,
-          total_deaths: data1.reports[0].deaths,
-          total_recovered: data1.reports[0].recovered,
-          active_cases: data1.reports[0].active_cases[0].currently_infected_patients,
-          data: sorted,
+          total_cases: sorted[0].TotalCases,
+          total_deaths: sorted[0].TotalDeaths,
+          active_cases: sorted[0].ActiveCases,
           new_cases: sorted[0].NewCases,
-          new_deaths: sorted[0].NewDeaths
+          new_deaths: sorted[0].NewDeaths,
+          data: sorted
         })
       })
       .catch((error) => console.log(error));
@@ -55,20 +52,18 @@ class Countries extends Component {
   renderItems() {
     const { data } = this.state;
 
-    const filteredCountries = data.filter(country => {
-      return country.Country.toLowerCase().includes(this.state.searchField.toLowerCase());
+    const filteredCountries = data.filter(state => {
+      return state.USAState.toLowerCase().includes(this.state.searchField.toLowerCase());
     });
 
     return filteredCountries.map((item) => (
-      <Country 
-        key={item.Country} 
-        country={item.Country} 
+      <State 
+        key={item.USAState} 
+        state={item.USAState} 
         cases={item.TotalCases} 
         new_cases={item.NewCases}
         deaths={item.TotalDeaths} 
         new_deaths={item.NewDeaths} 
-        recovered={item.TotalRecovered} 
-        critical={item.Serious_Critical} 
       />
     ));
   }
@@ -78,9 +73,9 @@ class Countries extends Component {
       <div className="row pt-2">
         <div className="col-xs-12 col-sm-12 col-md-2">
           <Overview
-            cases_type='Global'
+            cases_type='U.S.'
             total_cases={this.state.total_cases}
-            total_recovered={this.state.total_recovered}
+            total_recovered={parseInt(this.state.total_cases.split(",").join("")) - parseInt(this.state.active_cases.split(",").join("")) - parseInt(this.state.total_deaths.split(",").join(""))}
             total_deaths={this.state.total_deaths}
             active_cases={this.state.active_cases}
             new_cases={this.state.new_cases}
@@ -92,20 +87,18 @@ class Countries extends Component {
         <div className="col-xs-12 col-sm-12 col-md-10">
           <div className="card bg-light">
             <div className="card-body">
-              <h5><i className="fas fa-globe-americas"></i> Global Data</h5>
-              <SearchBox searchChange={this.onSearchChange} type='Search Country...' />
+              <h5><i className="fas fa-flag-usa"></i> United States Data</h5>
+              <SearchBox searchChange={this.onSearchChange} type='Search State...' />
               <p className="d-block d-sm-none">*Change your phone orientation to landscape to see the rest of the columns.</p>
               <table className="table table-bordered table-sm table-hover">
                 <thead className="thead-dark">
                   <tr>
-                    <th scope="col">Country</th>
+                    <th scope="col">State</th>
                     <th scope="col">Confirmed</th>
                     <th scope="col" className="d-none d-sm-table-cell">New Cases</th>
                     <th scope="col">Deaths</th>
                     <th scope="col" className="d-none d-sm-table-cell">New Deaths</th>
                     <th scope="col" className="d-none d-sm-table-cell">Fatality Rate</th>
-                    <th scope="col" className="d-none d-sm-table-cell">Recovered</th>
-                    <th scope="col" className="d-none d-sm-table-cell">Critical</th>
                   </tr>
                 </thead>
                 <tbody>
