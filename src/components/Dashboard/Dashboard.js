@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import Country from './Country.js';
+import WorldStat from './WorldStat';
+import Country from './Country';
 import SearchBox from '../SearchBox';
+import './dashboard.css';
 
 class Countries extends Component {
   constructor(props) {
@@ -52,7 +54,6 @@ class Countries extends Component {
           return response2.json();
         })
         .then((data2) => {
-
           const sorted = _.orderBy(data2.countries_stat, (obj) => {
             return parseInt((obj.cases).split(",").join(""));
           }, ['desc'])
@@ -86,52 +87,50 @@ class Countries extends Component {
         deaths={item.deaths} 
         new_deaths={item.new_deaths} 
         recovered={item.total_recovered} 
-        critical={item.serious_critical} />
+        critical={item.serious_critical} 
+      />
     ));
   }
   
   render() {
     return (
-      <div>
-        <div className="row pt-2">
-          <div className="col-xs-12 col-sm-12 col-md-2">
-            <div className="card bg-light">
-              <div className="card-body">
-                <strong>Total Confirmed Cases:</strong> <h4 className="text-danger">{this.state.total_cases}</h4>
-                <strong>Active Cases:</strong> <span className="text-primary">{(parseInt((this.state.total_cases.split(",").join(""))) - (parseInt((this.state.total_recovered).split(",").join("")) + parseInt((this.state.total_deaths).split(",").join("")))).toLocaleString()}</span> <br />
-                <strong>Recovered Cases:</strong> <span className="text-success">{this.state.total_recovered}</span> <br />
-                <strong>Fatal Cases:</strong> {this.state.total_deaths} <br />
-                <br />
-                <strong>New Cases:</strong> {this.state.new_cases} <br />
-                <strong>New Deaths:</strong> {this.state.new_deaths}
-
-                <br /><br />
-                <small>Last Updated: <br></br> {this.state.last_updated} GMT </small>
-              </div>
-            </div>
-              
-          </div>
-          <div className="col-xs-12 col-sm-12 col-md-10">
-            <SearchBox searchChange={this.onSearchChange} />
-
-            <table className="table table-bordered table-sm table-hover rounded">
-              <thead className="thead-dark">
-                <tr>
-                  <th scope="col">Country</th>
-                  <th scope="col">Confirmed</th>
-                  <th scope="col">New Cases</th>
-                  <th scope="col">Deaths</th>
-                  <th scope="col">New Deaths</th>
-                  <th scope="col">Fatality Rate</th>
-                  <th scope="col">Recovered</th>
-                  <th scope="col">Critical</th>
-                </tr>
-              </thead>
-              {this.renderItems()}
-            </table>
-          </div>
+      <div className="row pt-2">
+        <div className="col-xs-12 col-sm-12 col-md-2">
+          <WorldStat
+            total_cases={this.state.total_cases}
+            total_recovered={this.state.total_recovered}
+            total_deaths={this.state.total_deaths}
+            new_cases={this.state.new_cases}
+            new_deaths={this.state.new_deaths}
+            last_updated={this.state.last_updated} 
+          />
         </div>
         
+        <div className="col-xs-12 col-sm-12 col-md-10">
+          <div className="card bg-light">
+            <div className="card-body">
+              <h5><i class="fas fa-globe-americas"></i> Global Data</h5>
+              <SearchBox searchChange={this.onSearchChange} />
+              <table className="table table-bordered table-sm table-hover rounded">
+                <thead className="thead-dark">
+                  <tr>
+                    <th scope="col" width="250">Country</th>
+                    <th scope="col">Confirmed</th>
+                    <th scope="col">New Cases</th>
+                    <th scope="col">Deaths</th>
+                    <th scope="col">New Deaths</th>
+                    <th scope="col">Fatality Rate</th>
+                    <th scope="col">Recovered</th>
+                    <th scope="col">Critical</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.renderItems()}
+                </tbody>
+              </table>
+            </div>
+          </div>      
+        </div>
       </div>
     );
   }

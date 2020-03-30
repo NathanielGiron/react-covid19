@@ -1,0 +1,8 @@
+@media (max-width: 576px) {
+  .fa-search {
+    display: none;
+  }
+  .search-box {
+    margin-top: -16px;
+  }
+}
