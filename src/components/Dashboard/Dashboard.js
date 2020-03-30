@@ -114,7 +114,7 @@ class Countries extends Component {
               <table className="table table-bordered table-sm table-hover rounded">
                 <thead className="thead-dark">
                   <tr>
-                    <th scope="col" width="250">Country</th>
+                    <th scope="col">Country</th>
                     <th scope="col">Confirmed</th>
                     <th scope="col">New Cases</th>
                     <th scope="col">Deaths</th>

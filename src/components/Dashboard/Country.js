@@ -2,7 +2,7 @@ import React from 'react';
 
 const Country = ({ country, cases, new_cases, deaths, new_deaths, recovered, critical}) => ( 
   <tr>
-    <td width="250"><strong>{country}</strong></td>
+    <td><strong>{country}</strong></td>
     <td className="text-danger">{cases}</td>
     <td className="text-muted">{new_cases === '0' ? '' : '+' + new_cases}</td>
     <td>{deaths}</td>
