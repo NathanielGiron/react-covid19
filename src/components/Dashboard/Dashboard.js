@@ -111,7 +111,7 @@ class Countries extends Component {
             <div className="card-body">
               <h5><i class="fas fa-globe-americas"></i> Global Data</h5>
               <SearchBox searchChange={this.onSearchChange} />
-              
+              <p className="d-block d-sm-none">*Change your phone orientation to landscape to see the rest of the columns.</p>
               <table className="table table-bordered table-sm table-hover rounded">
                 <thead className="thead-dark">
                   <tr>
