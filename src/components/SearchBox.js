@@ -1,7 +1,7 @@
 import React from 'react';
 import './SearchBox.css';
 
-const SearchBox = ({ searchChange, type }) => {
+const SearchBox = ({ searchChange, placeholder }) => {
   return(
     <div className="form-inline mb-2">
       <i className="fas fa-search"></i> &nbsp;
@@ -9,7 +9,7 @@ const SearchBox = ({ searchChange, type }) => {
         type="search" 
         className="form-control form-control-sm search-box" 
         onChange={searchChange} 
-        placeholder={type} />
+        placeholder={placeholder} />
     </div>
     
   )

@@ -14,12 +14,17 @@ const NavBar = () => (
       <ul className="navbar-nav mr-auto">
         <li className="nav-item">
           <Link className='nav-link' to='/'>
-            Home
+            Global
           </Link>
         </li>
         <li className="nav-item">
           <Link className='nav-link' to='/us-cases'>
-            US Cases
+            United States
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className='nav-link' to='/ca-cases'>
+            Canada
           </Link>
         </li>
         <li className="nav-item">

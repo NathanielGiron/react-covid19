@@ -1,43 +1,37 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
 import Overview from '../components/Overview';
-import State from './State';
+import Province from './Province';
 import SearchBox from '../components/SearchBox';
 import '../components/Dashboard/dashboard.css';
 
-class UsCases extends Component {
+class CaCases extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       total_cases: '',
       total_deaths: '',
-      active_cases: '',
-      new_cases: '',
-      new_deaths: '',
       data: [],
       searchField: ''
     };
   }
 
   componentDidMount() {
-    const usastat = 'https://covid19-server.chrismichael.now.sh/api/v1/CasesInAllUSStates';
+    const canadastat = 'https://api.apify.com/v2/key-value-stores/fabbocwKrtxSDf96h/records/LATEST?disableRedirect=true';
 
-      fetch(usastat)
+      fetch(canadastat)
       .then((response1) => {
         return response1.json();
       })
       .then((data1) => {
-        const sorted = _.orderBy(data1.data[0].table, (obj) => {
-          return parseInt((obj.TotalCases).split(",").join(""));
+        const sorted = _.orderBy(data1.infectedByRegion, (obj) => {
+          return parseInt((obj.infectedCount).split(",").join(""));
         }, ['desc']);
 
         this.setState({
-          total_cases: sorted[0].TotalCases,
-          total_deaths: sorted[0].TotalDeaths,
-          active_cases: sorted[0].ActiveCases,
-          new_cases: sorted[0].NewCases,
-          new_deaths: sorted[0].NewDeaths,
+          total_cases: data1.infected,
+          total_deaths: data1.deceased,
           data: sorted
         })
       })
@@ -51,18 +45,16 @@ class UsCases extends Component {
   renderItems() {
     const { data } = this.state;
 
-    const filteredStates = data.filter(state => {
-      return state.USAState.toLowerCase().includes(this.state.searchField.toLowerCase());
+    const filteredProvinces = data.filter(province => {
+      return province.region.toLowerCase().includes(this.state.searchField.toLowerCase());
     });
 
-    return filteredStates.map((item) => (
-      <State 
-        key={item.USAState} 
-        state={item.USAState} 
-        cases={item.TotalCases} 
-        new_cases={item.NewCases}
-        deaths={item.TotalDeaths} 
-        new_deaths={item.NewDeaths} 
+    return filteredProvinces.map((item) => (
+      <Province 
+        key={item.region} 
+        province={item.region} 
+        cases={item.infectedCount} 
+        deaths={item.deceasedCount} 
       />
     ));
   }
@@ -81,30 +73,28 @@ class UsCases extends Component {
         <div className="row pt-2">
           <div className="col-xs-12 col-sm-12 col-md-2">
             <Overview
-              cases_location='U.S.'
+              cases_location='Canada'
               total_cases={this.state.total_cases}
-              total_recovered={parseInt(this.state.total_cases.split(",").join("")) - parseInt(this.state.active_cases.split(",").join("")) - parseInt(this.state.total_deaths.split(",").join(""))}
+              total_recovered={''}
               total_deaths={this.state.total_deaths}
-              active_cases={this.state.active_cases}
-              new_cases={this.state.new_cases}
-              new_deaths={this.state.new_deaths}
+              active_cases={''}
+              new_cases={''}
+              new_deaths={''}
             />
           </div>
           
           <div className="col-xs-12 col-sm-12 col-md-10">
             <div className="card bg-light">
               <div className="card-body">
-                <h5><i className="fas fa-flag-usa"></i> United States Data</h5>
-                <SearchBox searchChange={this.onSearchChange} placeholder="Search State..." />
+                <h5><i class="fab fa-canadian-maple-leaf"></i> Canada Data</h5>
+                <SearchBox searchChange={this.onSearchChange} placeholder="Search Province..." />
                 <p className="d-block d-sm-none">*Change your phone orientation to landscape to see the rest of the columns.</p>
                 <table className="table table-bordered table-sm table-hover">
                   <thead className="thead-dark">
                     <tr>
-                      <th scope="col">State</th>
+                      <th scope="col">Province</th>
                       <th scope="col">Confirmed</th>
-                      <th scope="col" className="d-none d-sm-table-cell">New Cases</th>
                       <th scope="col">Deaths</th>
-                      <th scope="col" className="d-none d-sm-table-cell">New Deaths</th>
                       <th scope="col" className="d-none d-sm-table-cell">Fatality Rate</th>
                     </tr>
                   </thead>
@@ -121,4 +111,4 @@ class UsCases extends Component {
   }
 }
 
-export default UsCases;
+export default CaCases;
