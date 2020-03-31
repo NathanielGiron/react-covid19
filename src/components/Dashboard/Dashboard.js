@@ -74,49 +74,59 @@ class Countries extends Component {
   }
   
   render() {
-    return (
-      <div className="row pt-2">
-        <div className="col-xs-12 col-sm-12 col-md-2">
-          <Overview
-            cases_type='Global'
-            total_cases={this.state.total_cases}
-            total_recovered={this.state.total_recovered}
-            total_deaths={this.state.total_deaths}
-            active_cases={this.state.active_cases}
-            new_cases={this.state.new_cases}
-            new_deaths={this.state.new_deaths}
-            last_updated={this.state.last_updated} 
-          />
+    if (!this.state.data.length) {
+      return (
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border text-primary mt-5" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
         </div>
-        
-        <div className="col-xs-12 col-sm-12 col-md-10">
-          <div className="card bg-light">
-            <div className="card-body">
-              <h5><i className="fas fa-globe-americas"></i> Global Data</h5>
-              <SearchBox searchChange={this.onSearchChange} type='Search Country...' />
-              <p className="d-block d-sm-none">*Change your phone orientation to landscape to see the rest of the columns.</p>
-              <table className="table table-bordered table-sm table-hover">
-                <thead className="thead-dark">
-                  <tr>
-                    <th scope="col">Country</th>
-                    <th scope="col">Confirmed</th>
-                    <th scope="col" className="d-none d-sm-table-cell">New Cases</th>
-                    <th scope="col">Deaths</th>
-                    <th scope="col" className="d-none d-sm-table-cell">New Deaths</th>
-                    <th scope="col" className="d-none d-sm-table-cell">Fatality Rate</th>
-                    <th scope="col" className="d-none d-sm-table-cell">Recovered</th>
-                    <th scope="col" className="d-none d-sm-table-cell">Critical</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.renderItems()}
-                </tbody>
-              </table>
-            </div>
-          </div>      
+      );
+    } else {
+      return (
+        <div className="row pt-2">
+          <div className="col-xs-12 col-sm-12 col-md-2">
+            <Overview
+              cases_type='Global'
+              total_cases={this.state.total_cases}
+              total_recovered={this.state.total_recovered}
+              total_deaths={this.state.total_deaths}
+              active_cases={this.state.active_cases}
+              new_cases={this.state.new_cases}
+              new_deaths={this.state.new_deaths}
+              last_updated={this.state.last_updated} 
+            />
+          </div>
+          
+          <div className="col-xs-12 col-sm-12 col-md-10">
+            <div className="card bg-light">
+              <div className="card-body">
+                <h5><i className="fas fa-globe-americas"></i> Global Data</h5>
+                <SearchBox searchChange={this.onSearchChange} type='Search Country...' />
+                <p className="d-block d-sm-none">*Change your phone orientation to landscape to see the rest of the columns.</p>
+                <table className="table table-bordered table-sm table-hover">
+                  <thead className="thead-dark">
+                    <tr>
+                      <th scope="col">Country</th>
+                      <th scope="col">Confirmed</th>
+                      <th scope="col" className="d-none d-sm-table-cell">New Cases</th>
+                      <th scope="col">Deaths</th>
+                      <th scope="col" className="d-none d-sm-table-cell">New Deaths</th>
+                      <th scope="col" className="d-none d-sm-table-cell">Fatality Rate</th>
+                      <th scope="col" className="d-none d-sm-table-cell">Recovered</th>
+                      <th scope="col" className="d-none d-sm-table-cell">Critical</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.renderItems()}
+                  </tbody>
+                </table>
+              </div>
+            </div>      
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
