@@ -20,22 +20,22 @@ class CaCases extends Component {
   componentDidMount() {
     const canadastat = 'https://api.apify.com/v2/key-value-stores/fabbocwKrtxSDf96h/records/LATEST?disableRedirect=true';
 
-      fetch(canadastat)
-      .then((response1) => {
-        return response1.json();
-      })
-      .then((data1) => {
-        const sorted = _.orderBy(data1.infectedByRegion, (obj) => {
-          return parseInt((obj.infectedCount).split(",").join(""));
-        }, ['desc']);
+    fetch(canadastat)
+    .then((response1) => {
+      return response1.json();
+    })
+    .then((data1) => {
+      const sorted = _.orderBy(data1.infectedByRegion, (obj) => {
+        return parseInt((obj.infectedCount).split(",").join(""));
+      }, ['desc']);
 
-        this.setState({
-          total_cases: data1.infected,
-          total_deaths: data1.deceased,
-          data: sorted
-        })
+      this.setState({
+        total_cases: data1.infected,
+        total_deaths: data1.deceased,
+        data: sorted
       })
-      .catch((error) => console.log(error));
+    })
+    .catch((error) => console.log(error));
   }
 
   onSearchChange = (event) => {
