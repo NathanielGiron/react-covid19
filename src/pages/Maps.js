@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactMapboxGl, { ZoomControl, Layer, Feature, Popup } from 'react-mapbox-gl';
+import ReactMapboxGl, { ZoomControl, RotationControl, Layer, Feature, Popup } from 'react-mapbox-gl';
 import MapDetails from './MapDetails';
 import './maps.css'
 
@@ -92,6 +92,7 @@ class Maps extends Component {
               center={this.props.center}
             >
               <ZoomControl />
+              <RotationControl />
               <Layer 
                 type="circle"
                 onMouseEnter=""
