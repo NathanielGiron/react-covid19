@@ -1,0 +1,10 @@
+.marker {
+  cursor: pointer;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.mapboxgl-canvas {
+  border-radius: 5px;
+  border: 1px solid #434857;
+}

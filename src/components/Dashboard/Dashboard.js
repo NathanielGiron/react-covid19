@@ -77,14 +77,14 @@ class Countries extends Component {
     if (!this.state.data.length) {
       return (
         <div className="d-flex justify-content-center">
-          <div className="spinner-border text-primary mt-5" role="status">
+          <div className="spinner-border text-danger mt-5" role="status">
             <span className="sr-only">Loading...</span>
           </div>
         </div>
       );
     } else {
       return (
-        <div className="row pt-2">
+        <div className="row pt-2" id="dashboard">
           <div className="col-xs-12 col-sm-12 col-md-2">
             <Overview
               cases_location='Global'
@@ -97,13 +97,13 @@ class Countries extends Component {
             />
           </div>
           
-          <div className="col-xs-12 col-sm-12 col-md-10">
-            <div className="card bg-light">
+          <div className="col-xs-12 col-sm-12 col-md-10 data-div">
+            <div className="card bg-dark">
               <div className="card-body">
-                <h5><i className="fas fa-globe-americas"></i> Global Data</h5>
+                <h5 className="text-light"><i className="fas fa-globe-americas"></i> Global Data</h5>
                 <SearchBox searchChange={this.onSearchChange} placeholder="Search Country..." />
                 <p className="d-block d-sm-none">*Change your phone orientation to landscape to see the rest of the columns.</p>
-                <table className="table table-bordered table-sm table-hover">
+                <table className="table table-dark table-sm table-hover">
                   <thead className="thead-dark">
                     <tr>
                       <th scope="col">Country</th>

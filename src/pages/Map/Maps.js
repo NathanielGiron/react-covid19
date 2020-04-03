@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactMapboxGl, { ZoomControl, RotationControl, Layer, Feature, Popup } from 'react-mapbox-gl';
-import MapDetails from './MapDetails';
-import './maps.css'
+import './maps.css';
 
 const Map = ReactMapboxGl({
   accessToken:
@@ -18,6 +17,7 @@ class Maps extends Component {
   }
 
   static defaultProps = {
+    style: 'mapbox://styles/mapbox/dark-v10',
     center: {
       lat: 28.0339,
       lng: 1.6596
@@ -73,7 +73,7 @@ class Maps extends Component {
     if (!this.state.data.length) {
       return (
         <div className="d-flex justify-content-center">
-          <div className="spinner-border text-primary mt-5" role="status">
+          <div className="spinner-border text-danger mt-5" role="status">
             <span className="sr-only">Loading...</span>
           </div>
         </div>
@@ -81,9 +81,9 @@ class Maps extends Component {
     } else {
       return(
         <div className="row pt-2">
-          <div className="col-xs-12 col-sm-12 col-md-12">
+          <div className="col">
             <Map
-              style="mapbox://styles/mapbox/light-v10"
+              style={this.props.style}
               containerStyle={{
                 height: '90vh',
                 width: '100%'
@@ -109,7 +109,7 @@ class Maps extends Component {
                 style={{'width': '200px'}}
                 >
                   <div>
-                    <a className="float-right cursor-pointer" onClick={this.closePopup}>&times;</a>
+                    <span className="float-right cursor-pointer" onClick={this.closePopup}>&times;</span>
                     <strong>{this.state.selectedMarker.Combined_Key}</strong>
                     <br /><br />
                     <strong>Confirmed: </strong><span className="text-danger">{this.state.selectedMarker.Confirmed}</span><br />

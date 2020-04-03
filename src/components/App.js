@@ -2,10 +2,10 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import NavBar from './NavBar';
 import Dashboard from './Dashboard/Dashboard';
-import Maps from '../pages/Maps';
-import UsCases from '../pages/UsCases';
-import CaCases from '../pages/CaCases';
-import AboutPage from '../pages/AboutPage';
+import Maps from '../pages/Map/Maps';
+import UsCases from '../pages/UsCases/UsCases';
+import CaCases from '../pages/CaCases/CaCases';
+import AboutPage from '../pages/About/AboutPage';
 import './App.css';
 
 function App() {
