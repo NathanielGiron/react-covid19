@@ -96,7 +96,7 @@ class UsCases extends Component {
               <div className="card-body">
                 <h5 className="text-light"><i className="fas fa-flag-usa"></i> United States Data</h5>
                 <SearchBox searchChange={this.onSearchChange} placeholder="Search State..." />
-                <p className="d-block d-sm-none">*Change your phone orientation to landscape to see the rest of the columns.</p>
+                <p className="d-block d-sm-none text-light-2">*Change your phone orientation to landscape to see the rest of the columns.</p>
                 <table className="table table-dark table-sm table-hover">
                   <thead className="thead-dark">
                     <tr>
