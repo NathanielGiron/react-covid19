@@ -69,6 +69,7 @@ class Countries extends Component {
         new_deaths={item.NewDeaths} 
         recovered={item.TotalRecovered} 
         critical={item.Serious_Critical} 
+        tests={item.TotalTests} 
       />
     ));
   }
@@ -114,6 +115,7 @@ class Countries extends Component {
                       <th scope="col" className="d-none d-sm-table-cell">Fatality Rate</th>
                       <th scope="col" className="d-none d-sm-table-cell">Recovered</th>
                       <th scope="col" className="d-none d-sm-table-cell">Critical</th>
+                      <th scope="col" className="d-none d-sm-table-cell">Total Tests</th>
                     </tr>
                   </thead>
                   <tbody>
