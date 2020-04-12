@@ -63,6 +63,7 @@ class UsCases extends Component {
         new_cases={item.NewCases}
         deaths={item.TotalDeaths} 
         new_deaths={item.NewDeaths} 
+        tests={item.TotalTests} 
       />
     ));
   }
@@ -106,6 +107,7 @@ class UsCases extends Component {
                       <th scope="col">Deaths</th>
                       <th scope="col" className="d-none d-sm-table-cell">New Deaths</th>
                       <th scope="col" className="d-none d-sm-table-cell">Fatality Rate</th>
+                      <th scope="col" className="d-none d-sm-table-cell">Total Tests</th>
                     </tr>
                   </thead>
                   <tbody>
