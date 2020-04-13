@@ -52,6 +52,9 @@ class UsCases extends Component {
     const { data } = this.state;
 
     const filteredStates = data.filter(state => {
+      if (state.USAState === "Total:") {
+        return false;
+      }
       return state.USAState.toLowerCase().includes(this.state.searchField.toLowerCase());
     });
 
@@ -64,6 +67,7 @@ class UsCases extends Component {
         deaths={item.TotalDeaths} 
         new_deaths={item.NewDeaths} 
         tests={item.TotalTests} 
+        TotCases_1M_Pop={item.Tot_Cases_1M_Pop}
       />
     ));
   }
@@ -108,6 +112,7 @@ class UsCases extends Component {
                       <th scope="col" className="d-none d-sm-table-cell">New Deaths</th>
                       <th scope="col" className="d-none d-sm-table-cell">Fatality Rate</th>
                       <th scope="col" className="d-none d-sm-table-cell">Total Tests</th>
+                      <th scope="col" className="d-none d-sm-table-cell">EST Pop</th>
                     </tr>
                   </thead>
                   <tbody>

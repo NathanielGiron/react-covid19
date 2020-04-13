@@ -6,6 +6,7 @@ import Maps from '../pages/Map/Maps';
 import UsCases from '../pages/UsCases/UsCases';
 import CaCases from '../pages/CaCases/CaCases';
 import AboutPage from '../pages/About/AboutPage';
+import Asean from '../pages/Asean/Asean';
 import './App.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path='/maps' component={Maps} />
           <Route path='/us-cases' component={UsCases} />
           <Route path='/ca-cases' component={CaCases} />
+          <Route path='/asean' component={Asean} />
           <Route path='/about' component={AboutPage} />
         </Switch>
       </div>

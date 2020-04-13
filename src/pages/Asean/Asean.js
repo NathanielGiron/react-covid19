@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import Overview from '../Overview';
+import Overview from '../../components/Overview';
 import Country from './Country';
-import SearchBox from '../SearchBox';
 import './dashboard.css';
 
-class Dashboard extends Component {
+class Asean extends Component {
   constructor(props) {
     super(props);
 
@@ -18,7 +17,7 @@ class Dashboard extends Component {
       new_deaths: '',
       data: [],
       last_updated: '',
-      searchField: ''
+      searchField: '',
     };
   }
 
@@ -34,14 +33,38 @@ class Dashboard extends Component {
           return parseInt((obj.TotalCases).split(",").join(""));
         }, ['desc']);
 
+        const asean = ["Brunei", "Cambodia", "Indonesia", "Laos", "Malaysia", "Myanmar", "Philippines", "Singapore", "Thailand", "Vietnam"];
+
+
+        const lookup = _.keyBy(asean, function(c) { return c });
+        const result = _.filter(sorted, function(c) {
+            return lookup[c.Country] !== undefined;
+        });
+
+        let cases = 0;
+        let active = 0;
+        let recovered = 0;
+        let deaths = 0;
+        let newCases = 0;
+        let newDeaths = 0;
+        
+        for (let i=0; i<result.length; i++) {
+          cases += result[i].ActiveCases ? parseInt(result[i].TotalCases.split(",").join("")) : 0;
+          active += result[i].ActiveCases ? parseInt(result[i].ActiveCases.split(",").join("")) : 0;
+          recovered += result[i].TotalRecovered ? parseInt(result[i].TotalRecovered.split(",").join("")) : 0;
+          deaths += result[i].TotalDeaths ? parseInt(result[i].TotalDeaths.split(",").join("")) : 0;
+          newCases += result[i].NewCases ? parseInt(result[i].NewCases.split(",").join("")) : 0;
+          newDeaths += result[i].NewDeaths ? parseInt(result[i].NewDeaths.split(",").join("")): 0;
+        }
+
         this.setState({
-          total_cases: data1.reports[0].cases,
-          total_deaths: data1.reports[0].deaths,
-          total_recovered: data1.reports[0].recovered,
-          active_cases: data1.reports[0].active_cases[0].currently_infected_patients,
-          data: sorted,
-          new_cases: sorted[0].NewCases,
-          new_deaths: sorted[0].NewDeaths
+          total_cases: cases,
+          total_deaths: deaths,
+          total_recovered: recovered,
+          active_cases: active,
+          data: result,
+          new_cases: newCases,
+          new_deaths: newDeaths
         })
       })
       .catch((error) => console.log(error));
@@ -51,17 +74,12 @@ class Dashboard extends Component {
     this.setState({searchField: event.target.value})
   }
 
+  
+
   renderItems() {
     const { data } = this.state;
 
-    const filteredCountries = data.filter(country => {
-      if (country.Country === "Total:") {
-        return false;
-      }
-      return country.Country.toLowerCase().includes(this.state.searchField.toLowerCase());
-    });
-
-    return filteredCountries.map((item) => (
+    return data.map((item) => (
       <Country 
         key={item.Country} 
         country={item.Country} 
@@ -91,7 +109,7 @@ class Dashboard extends Component {
         <div className="row pt-2" id="dashboard">
           <div className="col-xs-12 col-sm-12 col-md-2">
             <Overview
-              cases_location='Global'
+              cases_location='ASEAN'
               total_cases={this.state.total_cases}
               total_recovered={this.state.total_recovered}
               total_deaths={this.state.total_deaths}
@@ -104,8 +122,7 @@ class Dashboard extends Component {
           <div className="col-xs-12 col-sm-12 col-md-10 data-div">
             <div className="card bg-dark">
               <div className="card-body">
-                <h5 className="text-light"><i className="fas fa-globe-americas"></i> Global Data</h5>
-                <SearchBox searchChange={this.onSearchChange} placeholder="Search Country..." />
+                <h5 className="text-light"><i className="fas fa-globe-asia"></i> ASEAN Data</h5>
                 <p className="d-block d-sm-none">*Change your phone orientation to landscape to see the rest of the columns.</p>
                 <table className="table table-dark table-sm table-hover">
                   <thead className="thead-dark">
@@ -135,4 +152,4 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+export default Asean;

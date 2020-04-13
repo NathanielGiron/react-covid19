@@ -9,6 +9,7 @@ import './index.css';
 import 'jquery/dist/jquery.js';
 import 'popper.js/dist/popper.js';
 import 'bootstrap/dist/js/bootstrap.js';
+import 'bootstrap/js/dist/popover';
 
 ReactDOM.render(
   <Router>

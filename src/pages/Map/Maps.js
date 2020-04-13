@@ -33,8 +33,6 @@ class Maps extends Component {
       return response1.json();
     })
     .then((data1) => {
-      console.log(data1.data.table);
-
       this.setState({
         data: data1.data.table
       })
