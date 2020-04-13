@@ -30,7 +30,6 @@ class Countries extends Component {
         return response1.json();
       })
       .then((data1) => {
-        console.log(data1.reports);
         const sorted = _.orderBy(data1.reports[0].table[0], (obj) => {
           return parseInt((obj.TotalCases).split(",").join(""));
         }, ['desc']);
@@ -56,6 +55,9 @@ class Countries extends Component {
     const { data } = this.state;
 
     const filteredCountries = data.filter(country => {
+      if (country.Country === "Total:") {
+        return false;
+      }
       return country.Country.toLowerCase().includes(this.state.searchField.toLowerCase());
     });
 
@@ -70,6 +72,7 @@ class Countries extends Component {
         recovered={item.TotalRecovered} 
         critical={item.Serious_Critical} 
         tests={item.TotalTests} 
+        TotCases_1M_Pop={item.TotCases_1M_Pop}
       />
     ));
   }
@@ -116,6 +119,7 @@ class Countries extends Component {
                       <th scope="col" className="d-none d-sm-table-cell">Recovered</th>
                       <th scope="col" className="d-none d-sm-table-cell">Critical</th>
                       <th scope="col" className="d-none d-sm-table-cell">Total Tests</th>
+                      <th scope="col" className="d-none d-sm-table-cell">Population</th>
                     </tr>
                   </thead>
                   <tbody>
