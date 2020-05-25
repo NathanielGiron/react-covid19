@@ -85,31 +85,31 @@ class Calculator extends Component {
             
             <h4 className="mt-4 pt-4">Age*</h4>
             <div className="btn-group-toggle" data-toggle="buttons">
-              <label className="btn btn-primary mr-2">
+              <label className="btn btn-primary mr-2 mb-1">
                 <input type="radio" name="age" value=".2" required onClick={this.onAgeChange} /> 0 - 19
               </label>
 
-              <label className="btn btn-primary mr-2">
+              <label className="btn btn-primary mr-2 mb-1">
                 <input type="radio" name="age" value=".2" onClick={this.onAgeChange} /> 20 - 39
               </label>
 
-              <label className="btn btn-primary mr-2">
+              <label className="btn btn-primary mr-2 mb-1">
                 <input type="radio" name="age" value=".4" onClick={this.onAgeChange} /> 40 - 49
               </label>
 
-              <label className="btn btn-primary mr-2">
+              <label className="btn btn-primary mr-2 mb-1">
                 <input type="radio" name="age" value="1.3" onClick={this.onAgeChange} /> 50 - 59
               </label>
 
-              <label className="btn btn-primary mr-2">
+              <label className="btn btn-primary mr-2 mb-1">
                 <input type="radio" name="age" value="3.6" onClick={this.onAgeChange} /> 60 - 69
               </label>
 
-              <label className="btn btn-primary mr-2">
+              <label className="btn btn-primary mr-2 mb-1">
                 <input type="radio" name="age" value="8.0" onClick={this.onAgeChange} /> 70 - 79
               </label>
 
-              <label className="btn btn-primary mr-2">
+              <label className="btn btn-primary mr-2 mb-1">
                 <input type="radio" name="age" value="14.8" onClick={this.onAgeChange} /> 80+
               </label>
             </div>
