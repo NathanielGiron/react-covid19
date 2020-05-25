@@ -57,11 +57,16 @@ class Calculator extends Component {
     if(age === 0 && sex === 0 && npemc === 0) {
       this.setState({result:.9});
     } else if(age === 0 && sex === 0) {
-      let result = (1) * (pemc - (npemc-1))
+      let result = (1) * (pemc - (npemc-1));
+
+      this.setState({result:result});
+    } else if(npemc === 0) {
+      let result = (age+sex) * (.9);
+
       this.setState({result:result})
     } else {
       let result = (age+sex) * (pemc - (npemc-1))
-      console.log(result);
+      
       if(result>92) {
         result = 92;
       }
