@@ -7,6 +7,7 @@ import UsCases from '../pages/UsCases/UsCases';
 import CaCases from '../pages/CaCases/CaCases';
 import AboutPage from '../pages/About/AboutPage';
 import Asean from '../pages/Asean/Asean';
+import Calculator from '../pages/Calculator/Calculator';
 import './App.css';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path='/ca-cases' component={CaCases} />
           <Route path='/asean' component={Asean} />
           <Route path='/about' component={AboutPage} />
+          <Route path='/calculator' component={Calculator} />
         </Switch>
       </div>
     </div>

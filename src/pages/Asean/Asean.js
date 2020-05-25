@@ -15,9 +15,7 @@ class Asean extends Component {
       active_cases: '',
       new_cases: '',
       new_deaths: '',
-      data: [],
-      last_updated: '',
-      searchField: '',
+      data: []
     };
   }
 
@@ -47,7 +45,7 @@ class Asean extends Component {
         let deaths = 0;
         let newCases = 0;
         let newDeaths = 0;
-        
+
         for (let i=0; i<result.length; i++) {
           cases += result[i].ActiveCases ? parseInt(result[i].TotalCases.split(",").join("")) : 0;
           active += result[i].ActiveCases ? parseInt(result[i].ActiveCases.split(",").join("")) : 0;
@@ -73,9 +71,7 @@ class Asean extends Component {
   onSearchChange = (event) => {
     this.setState({searchField: event.target.value})
   }
-
   
-
   renderItems() {
     const { data } = this.state;
 

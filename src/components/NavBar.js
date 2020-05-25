@@ -43,6 +43,7 @@ const NavBar = () => (
           </Link>
         </li>
       </ul>
+      <Link className="btn btn-outline-success" to='/calculator'>Survival Rate Calculator</Link>
     </div>
   </nav>
 )
