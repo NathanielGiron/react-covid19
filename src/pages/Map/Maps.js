@@ -26,7 +26,7 @@ class Maps extends Component {
   }
 
   componentDidMount() {
-    const mapdata = 'https://covid19-server.chrismichael.now.sh/api/v1/JohnsHopkinsDataDailyReport';
+    const mapdata = 'https://corona.lmao.ninja/v2/countries';
 
     fetch(mapdata)
     .then((response1) => {
@@ -34,7 +34,7 @@ class Maps extends Component {
     })
     .then((data1) => {
       this.setState({
-        data: data1.data.table
+        data: data1
       })
     })
     .catch((error) => console.log(error));
@@ -57,8 +57,8 @@ class Maps extends Component {
 
     return data.map((item) => (
       <Feature 
-        key={item.Combined_Key} 
-        coordinates={[item.Long_, item.Lat]} 
+        key={item.countryInfo._id} 
+        coordinates={[item.countryInfo.long, item.countryInfo.lat]} 
         onClick={() => (
           this.selectedMarker(item)
         )}
@@ -103,16 +103,16 @@ class Maps extends Component {
               </Layer>
               {this.state.selectedMarker !== null ? (
                 <Popup
-                coordinates={[this.state.selectedMarker.Long_, this.state.selectedMarker.Lat]} 
+                coordinates={[this.state.selectedMarker.countryInfo.long, this.state.selectedMarker.countryInfo.lat]} 
                 style={{'width': '200px'}}
                 >
                   <div>
                     <span className="float-right cursor-pointer" onClick={this.closePopup}>&times;</span>
-                    <strong>{this.state.selectedMarker.Combined_Key}</strong>
+                    <strong><img src={this.state.selectedMarker.countryInfo.flag} width="30" /> {this.state.selectedMarker.country}</strong>
                     <br /><br />
-                    <strong>Confirmed: </strong><span className="text-danger">{this.state.selectedMarker.Confirmed}</span><br />
-                    <strong>Deaths: </strong><span className="">{this.state.selectedMarker.Deaths}</span><br />
-                    <strong>Recovered: </strong><span className="text-success">{this.state.selectedMarker.Recovered}</span><br />
+                    <strong>Confirmed: </strong><span className="text-danger">{this.state.selectedMarker.cases}</span><br />
+                    <strong>Deaths: </strong><span className="">{this.state.selectedMarker.deaths}</span><br />
+                    <strong>Recovered: </strong><span className="text-success">{this.state.selectedMarker.recovered}</span><br />
                   </div>
                 </Popup>
               ) : null}
