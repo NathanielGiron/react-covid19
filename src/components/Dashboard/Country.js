@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Country = ({ country, cases, new_cases, deaths, new_deaths, recovered, critical, tests, TotCases_1M_Pop}) => ( 
+const Country = ({ country, cases, new_cases, deaths, new_deaths, recovered, critical, tests, population}) => ( 
   <tr>
     <td><strong>{country}</strong>{country === 'USA' ? <Link className='btn btn-sm btn-primary float-right' to='/us-cases'>Expand</Link> : ''}</td>
     <td className="text-danger"><small className="text-info d-block d-sm-none">{new_cases}</small>{cases}</td>
@@ -12,7 +12,7 @@ const Country = ({ country, cases, new_cases, deaths, new_deaths, recovered, cri
     <td className="text-success d-none d-sm-table-cell">{recovered}</td>
     <td className="d-none d-sm-table-cell">{critical}</td>
     <td className="d-none d-sm-table-cell">{tests}</td>
-    <td className="d-none d-sm-table-cell"><small>{TotCases_1M_Pop ? parseInt((1000000 / parseFloat(TotCases_1M_Pop.split(",").join(""))) * parseFloat(cases.split(",").join(""))).toLocaleString() : ""}</small></td>
+    <td className="d-none d-sm-table-cell"><small>{population}</small></td>
   </tr>
 );
 

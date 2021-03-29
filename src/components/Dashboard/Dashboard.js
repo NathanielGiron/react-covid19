@@ -23,7 +23,7 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    const worldstat = 'https://covid19-server.chrismichael.now.sh/api/v1/AllReports';
+    const worldstat = 'https://www.ncovid19.it/api/v1/AllReports.php';
 
       fetch(worldstat)
       .then((response1) => {
@@ -70,9 +70,9 @@ class Dashboard extends Component {
         deaths={item.TotalDeaths} 
         new_deaths={item.NewDeaths} 
         recovered={item.TotalRecovered} 
-        critical={item.Serious_Critical} 
+        critical={item.SeriousCritical} 
         tests={item.TotalTests} 
-        TotCases_1M_Pop={item.TotCases_1M_Pop}
+        population={item.Population}
       />
     ));
   }
@@ -119,7 +119,7 @@ class Dashboard extends Component {
                       <th scope="col" className="d-none d-sm-table-cell">Recovered</th>
                       <th scope="col" className="d-none d-sm-table-cell">Critical</th>
                       <th scope="col" className="d-none d-sm-table-cell">Total Tests</th>
-                      <th scope="col" className="d-none d-sm-table-cell">EST Pop</th>
+                      <th scope="col" className="d-none d-sm-table-cell">Population</th>
                     </tr>
                   </thead>
                   <tbody>
