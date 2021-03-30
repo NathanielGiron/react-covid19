@@ -21,23 +21,26 @@ class UsCases extends Component {
   }
 
   componentDidMount() {
-    const usastat = 'https://covid19-server.chrismichael.now.sh/api/v1/CasesInAllUSStates';
+    const usastat = 'https://www.ncovid19.it/api/v1/CasesInAllUSStates.php';
 
       fetch(usastat)
       .then((response1) => {
         return response1.json();
       })
       .then((data1) => {
-        const sorted = _.orderBy(data1.data[0].table, (obj) => {
-          return parseInt((obj.TotalCases).split(",").join(""));
+        const sorted = _.orderBy(data1, (obj) => {
+          return parseInt((obj.New_Cases).split(",").join(""));
         }, ['desc']);
 
+        let activeCases = Object.values(sorted[1])[7];
+        console.log(activeCases);
+
         this.setState({
-          total_cases: sorted[0].TotalCases,
-          total_deaths: sorted[0].TotalDeaths,
-          active_cases: sorted[0].ActiveCases,
-          new_cases: sorted[0].NewCases,
-          new_deaths: sorted[0].NewDeaths,
+          total_cases: sorted[1].New_Cases,
+          total_deaths: sorted[1].New_Deaths,
+          active_cases: activeCases,
+          new_cases: sorted[1].Total_Deaths,
+          new_deaths: sorted[1].Active_Deaths,
           data: sorted
         })
       })
@@ -55,19 +58,18 @@ class UsCases extends Component {
       if (state.USAState === "Total:") {
         return false;
       }
-      return state.USAState.toLowerCase().includes(this.state.searchField.toLowerCase());
+      return state.Tatal_Cases.toLowerCase().includes(this.state.searchField.toLowerCase());
     });
 
     return filteredStates.map((item) => (
       <State 
-        key={item.USAState} 
-        state={item.USAState} 
-        cases={item.TotalCases} 
-        new_cases={item.NewCases}
-        deaths={item.TotalDeaths} 
-        new_deaths={item.NewDeaths} 
-        tests={item.TotalTests} 
-        TotCases_1M_Pop={item.Tot_Cases_1M_Pop}
+        key={item.Tatal_Cases} 
+        state={item.Tatal_Cases} 
+        cases={item.New_Cases} 
+        new_cases={item.Total_Deaths}
+        deaths={item.New_Deaths} 
+        new_deaths={item.Active_Deaths} 
+        TotCases_1M_Pop={item.Total_Tests}
       />
     ));
   }
@@ -111,7 +113,6 @@ class UsCases extends Component {
                       <th scope="col">Deaths</th>
                       <th scope="col" className="d-none d-sm-table-cell">New Deaths</th>
                       <th scope="col" className="d-none d-sm-table-cell">Fatality Rate</th>
-                      <th scope="col" className="d-none d-sm-table-cell">Total Tests</th>
                       <th scope="col" className="d-none d-sm-table-cell">EST Pop</th>
                     </tr>
                   </thead>
